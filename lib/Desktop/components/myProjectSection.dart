@@ -10,14 +10,16 @@ class MyProjectsSection extends StatelessWidget {
   @override
   List<ProjectModel> projects = [
     ProjectModel(
-      photo: 'assets/images/icpc.jpg',
-      name: 'CheapShope',
-      explain: 'lap lap lap lap lap lap lap \n\n\nlap ',
+      photo: 'assets/images/SchoolMate.jpg',
+      name: 'School Mate',
+      explain:
+          'Is a project to mange schools in profisonal way and keep students, teachers , parents and school in touch!\n The app diveded in rolls to give free experment to anyone use the app\n students can do all thier school activties online! and teachers do thie jop with more help\n the app has an admin panel to controll everything in one place',
     ),
     ProjectModel(
-      photo: 'assets/images/SchoolMate.jpg',
-      name: 'CheapShope',
-      explain: 'lap lap lap lap lap lap lap \n\n\nlap ',
+      photo: 'assets/images/cheap_shop.jpg',
+      name: 'Cheap Shop',
+      explain:
+          'E-commerce market built to buy and sell the proudcts whose about to expire\nhas a lot of features like search on product , search by category, and even contact with customers and seller with comments on proudct!',
     ),
   ];
   Widget build(BuildContext context) {
@@ -112,17 +114,17 @@ class MyProjectCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: setHightForDesktop(39),
+                  height: setHightForDesktop(25),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
                     left: setWidthForDesktop(20),
-                    top: setHightForDesktop(20),
+                    top: setHightForDesktop(10),
                   ),
                   child: Column(
                     children: [
                       SizedBox(
-                        height: setHightForDesktop(100),
+                        height: setHightForDesktop(75),
                         width: setWidthForDesktop(585),
                         child: Text(
                           '$name',
@@ -134,10 +136,10 @@ class MyProjectCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: setHightForDesktop(15),
+                        height: setHightForDesktop(5),
                       ),
                       SizedBox(
-                        height: setHightForDesktop(200),
+                        height: setHightForDesktop(250),
                         width: setWidthForDesktop(585),
                         child: Text(
                           explain,
