@@ -23,7 +23,7 @@ class _RecentWorkState extends State<RecentWork> {
       explain: 'lap lap lap lap lap lap lap \n\n\nlap ',
     ),
     RecentWorkModel(
-      photo: 'assets/images/icpc.jpg',
+      photo: 'assets/images/SchoolMate.jpg',
       name: 'CheapShope',
       explain: 'lap lap lap lap lap lap lap \n\n\nlap ',
     ),

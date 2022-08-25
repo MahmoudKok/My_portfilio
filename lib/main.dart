@@ -1,10 +1,13 @@
 //import 'dart:html';
+import 'package:my_portfile2/Desktop/DesktopScreen.dart';
+import 'package:my_portfile2/MainScreen.dart';
 import 'package:my_portfile2/Mobile/mobile.dart';
+import 'package:my_portfile2/sizeConfig.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,18 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, widget) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, widget!),
-          breakpoints: const [
-            ResponsiveBreakpoint.resize(350, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(600, name: TABLET),
-            ResponsiveBreakpoint.resize(800, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(1700, name: 'LX'),
-          ]),
-      debugShowCheckedModeBanner: false,
-      home: const MobileScreen(),
-    );
+    SizeConfig.init(context);
+    return const DesktopScreen();
   }
 }
 
