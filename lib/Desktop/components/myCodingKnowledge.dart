@@ -57,7 +57,7 @@ class MyCodeingKnowledge extends StatelessWidget {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: setHightForDesktop(40),
                       crossAxisSpacing: setWidthForDesktop(54),
-                      mainAxisExtent: setHightForDesktop(250),
+                      mainAxisExtent: setHightForDesktop(290),
                       crossAxisCount: 2,
                     ),
                     itemCount: codeknowledge.length,
@@ -93,7 +93,7 @@ class CodeKnowledgeCard extends StatelessWidget {
       padding: EdgeInsets.only(
           top: setHightForDesktop(20), bottom: setHightForDesktop(20)),
       child: SizedBox(
-        height: setHightForDesktop(240),
+        height: setHightForDesktop(250),
         width: setWidthForDesktop(845.5),
         child: Stack(
           children: [
@@ -107,7 +107,7 @@ class CodeKnowledgeCard extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Container(
-                height: setHightForDesktop(200),
+                height: setHightForDesktop(240),
                 width: setWidthForDesktop(805.5),
                 decoration: BoxDecoration(
                   color: kyellow,
@@ -149,7 +149,7 @@ class CodeKnowledgeCard extends StatelessWidget {
                             height: setHightForDesktop(20),
                           ),
                           Container(
-                            height: setHightForDesktop(60),
+                            height: setHightForDesktop(80),
                             width: setWidthForDesktop(554),
                             child: AnimatedRate(percentage: precent),
                           ),

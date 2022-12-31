@@ -63,15 +63,15 @@ class MySkillsSection extends StatelessWidget {
           child: Column(children: [
             headSection('My Skills'),
             SizedBox(
-              height: setHightForDesktop(100),
+              height: setHightForDesktop(59),
             ),
             SizedBox(
-              height: setHightForDesktop(795),
+              height: setHightForDesktop(850),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   mainAxisSpacing: setHightForDesktop(40),
                   crossAxisSpacing: setWidthForDesktop(54),
-                  mainAxisExtent: setHightForDesktop(240),
+                  mainAxisExtent: setHightForDesktop(260),
                   crossAxisCount: 2,
                 ),
                 itemCount: mySkills.length,
@@ -105,7 +105,7 @@ class SkillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: setHightForDesktop(230),
-      width: setWidthForDesktop(845.5),
+      width: setWidthForDesktop(850.5),
       child: Stack(
         children: [
           Align(
@@ -118,8 +118,8 @@ class SkillCard extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: Container(
-              height: setHightForDesktop(230),
-              width: setWidthForDesktop(820.5),
+              height: setHightForDesktop(240),
+              width: setWidthForDesktop(795.5),
               decoration: BoxDecoration(
                 color: kyellow,
                 borderRadius: BorderRadius.circular(10),
@@ -145,7 +145,7 @@ class SkillCard extends StatelessWidget {
                           height: setHightForDesktop(10),
                         ),
                         SizedBox(
-                          height: setHightForDesktop(125),
+                          height: setHightForDesktop(120),
                           width: setWidthForDesktop(565),
                           child: Text(
                             '$exlplain',

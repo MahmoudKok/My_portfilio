@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_portfile2/constant.dart';
 
-import '../../constant.dart';
-import '../../sizeConfig.dart';
-
-class AboutMeSection extends StatelessWidget {
-  const AboutMeSection({
-    Key? key,
-  }) : super(key: key);
+class Move extends StatelessWidget {
+  const Move({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kbackground,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           double hi = constraints.maxHeight;

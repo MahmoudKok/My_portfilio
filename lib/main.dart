@@ -1,22 +1,49 @@
 //import 'dart:html';
+import 'package:flutter/gestures.dart';
 import 'package:my_portfile2/Desktop/DesktopScreen.dart';
+import 'package:my_portfile2/Desktop/components/aboutMeSection.dart';
+import 'package:my_portfile2/Desktop/components/headSection.dart';
 import 'package:my_portfile2/MainScreen.dart';
 import 'package:my_portfile2/Mobile/mobile.dart';
+import 'package:my_portfile2/constant.dart';
 import 'package:my_portfile2/sizeConfig.dart';
+import 'package:my_portfile2/testScreen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 
+import 'Desktop/components/move.dart';
+
 void main() {
-  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return const DesktopScreen();
+    return MaterialApp(
+      scrollBehavior: MyCustomScrollBehavior(),
+      debugShowCheckedModeBanner: false,
+      darkTheme: Theme.of(context).copyWith(platform: TargetPlatform.android),
+      builder: (context, widget) {
+        return ResponsiveWrapper.builder(
+          ClampingScrollWrapper.builder(context, widget!),
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(450, name: MOBILE),
+            ResponsiveBreakpoint.resize(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: TABLET),
+            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+            ResponsiveBreakpoint.resize(1200, name: '4K'),
+          ],
+          background: Container(
+            color: kbackground,
+          ),
+        );
+      },
+      home: const HeadSection(),
+    );
   }
 }
 
@@ -136,4 +163,13 @@ class _MainPageState extends State<MainPage> {
       fontSize: 30,
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
