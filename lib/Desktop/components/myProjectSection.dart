@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfile2/Desktop/DesktopModels/MyProjectModel.dart';
 
 import '../../constant.dart';
@@ -39,28 +40,41 @@ class MyProjectsSection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              headSection('My recent Project'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.work,
+                    color: kpink,
+                    size: 60,
+                  ),
+                  headSection('My recent Project'),
+                ],
+              ),
               SizedBox(
                 height: setHightForDesktop(62),
               ),
-              SizedBox(
-                height: setHightForDesktop(800),
-                width: setWidthForDesktop(1900),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: projects.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: setWidthForDesktop(100),
-                    );
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return MyProjectCard(
-                      name: projects[index].name,
-                      explain: projects[index].explain,
-                      photo: projects[index].photo,
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: setHightForDesktop(800),
+                  width: setWidthForDesktop(1900),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: projects.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: setWidthForDesktop(100),
+                      );
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return MyProjectCard(
+                        name: projects[index].name,
+                        explain: projects[index].explain,
+                        photo: projects[index].photo,
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -71,94 +85,105 @@ class MyProjectsSection extends StatelessWidget {
   }
 }
 
-class MyProjectCard extends StatelessWidget {
+class MyProjectCard extends StatefulWidget {
   MyProjectCard({
     Key? key,
     this.explain,
     this.name,
     this.photo,
+    this.ishover = false,
   }) : super(key: key);
   final name;
   final explain;
   final photo;
+  bool ishover = false;
 
   @override
+  State<MyProjectCard> createState() => _MyProjectCardState();
+}
+
+class _MyProjectCardState extends State<MyProjectCard> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: setHightForDesktop(700),
-      width: setWidthForDesktop(585),
-      child: Stack(
-        children: [
-          Container(
-            height: setHightForDesktop(700),
-            width: setWidthForDesktop(585),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
+    return MouseRegion(
+      onHover: (s) {
+        setState(() {
+          widget.ishover = true;
+        });
+      },
+      onExit: (s) {
+        setState(() {
+          widget.ishover = false;
+        });
+      },
+      child: Container(
+        height: setHightForDesktop(700),
+        width: setWidthForDesktop(585),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          children: [
+            Container(
+              height: widget.ishover
+                  ? setHightForDesktop(620)
+                  : setHightForDesktop(310),
+              width: setWidthForDesktop(585),
+              decoration: BoxDecoration(
+                color: kyellow,
+                borderRadius: BorderRadius.circular(30),
+                image: DecorationImage(
+                  image: AssetImage(widget.photo),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Column(
-              children: [
-                Container(
-                  height: setHightForDesktop(310),
-                  width: setWidthForDesktop(585),
-                  decoration: BoxDecoration(
-                    color: kyellow,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage(photo),
-                      fit: BoxFit.cover,
+            SizedBox(
+              height: setHightForDesktop(25),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: setWidthForDesktop(20),
+                top: setHightForDesktop(10),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: setHightForDesktop(75),
+                    width: setWidthForDesktop(585),
+                    child: Text(
+                      '${widget.name}',
+                      style: TextStyle(
+                        color: kpurble,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: setHightForDesktop(25),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: setWidthForDesktop(20),
-                    top: setHightForDesktop(10),
+                  SizedBox(
+                    height: setHightForDesktop(5),
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: setHightForDesktop(75),
-                        width: setWidthForDesktop(585),
-                        child: Text(
-                          '$name',
-                          style: TextStyle(
-                            color: kpurble,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: setHightForDesktop(5),
-                      ),
-                      SizedBox(
-                        height: setHightForDesktop(250),
-                        width: setWidthForDesktop(585),
-                        child: Text(
-                          explain,
+                  Visibility(
+                    visible: !widget.ishover,
+                    child: SizedBox(
+                      height: setHightForDesktop(250),
+                      width: setWidthForDesktop(585),
+                      child: Text(widget.explain,
                           maxLines: 10,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.firaSans(
                             color: darkgrey2,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                          )),
+                    ),
                   ),
-                )
-              ],
-            ),
-          ),
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

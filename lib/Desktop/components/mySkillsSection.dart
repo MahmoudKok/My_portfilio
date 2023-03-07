@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfile2/Desktop/DesktopModels/SkillModel.dart';
 
 import '../../constant.dart';
@@ -16,25 +17,39 @@ class MySkillsSection extends StatelessWidget {
       photo: 'assets/images/github.png',
     ),
     SkillModel(
+      name: 'Algorithm',
+      photo: 'images/algo.png',
+    ),
+    SkillModel(
+      name: 'AI',
+      photo: 'images/ai.png',
+    ),
+    SkillModel(
       explain:
           'Solve programming problems using algorthim and data structur sience',
-      photo: 'assets/images/ui_ux.png',
+      photo: 'assets/images/problem_solving.png',
       name: 'Problem solving',
     ),
     SkillModel(
+      explain:
+          'Solve programming problems using algorthim and data structur sience',
+      photo: 'assets/images/search_ai.png',
+      name: 'Ai Search\nAlgorithms',
+    ),
+    SkillModel(
       explain: 'Create and develop mobile apps using flutter framework',
-      photo: 'assets/images/app_dev.png',
+      photo: 'assets/images/app_develop.png',
       name: 'Apps developing',
     ),
     SkillModel(
       explain: 'Contestant at ICPC competitive programming contests',
-      photo: 'assets/images/problem_solve.png',
-      name: 'CP',
+      photo: 'assets/images/cp.png',
+      name: 'Competitive\nProgramming',
     ),
     SkillModel(
       explain:
           'Handle with Api\'s and build full apps with backend and database',
-      photo: 'assets/images/restApi.png',
+      photo: 'images/resfulApi.png',
       name: 'RestFull API\'s',
     ),
     SkillModel(
@@ -60,31 +75,119 @@ class MySkillsSection extends StatelessWidget {
             left: setWidthForDesktop(75),
             right: setWidthForDesktop(75),
           ),
-          child: Column(children: [
-            headSection('My Skills'),
-            SizedBox(
-              height: setHightForDesktop(100),
-            ),
-            SizedBox(
-              height: setHightForDesktop(795),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: setHightForDesktop(40),
-                  crossAxisSpacing: setWidthForDesktop(54),
-                  mainAxisExtent: setHightForDesktop(240),
-                  crossAxisCount: 2,
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.workspace_premium_outlined,
+                  color: kpink,
+                  size: 60,
                 ),
-                itemCount: mySkills.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SkillCard(
-                    name: mySkills[index].name,
-                    exlplain: mySkills[index].explain,
-                    photo: mySkills[index].photo,
-                  );
-                },
+                headSection('My Skills'),
+              ],
+            ),
+            Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: List.generate(
+                mySkills.length,
+                (index) => SkillsCard(
+                  name: mySkills[index].name,
+                  photo: mySkills[index].photo,
+                ),
               ),
             ),
+            SizedBox(
+              height: setHightForDesktop(20),
+            )
           ]),
+        ),
+      ),
+    );
+  }
+}
+
+class SkillsCard extends StatefulWidget {
+  SkillsCard({
+    Key? key,
+    this.name,
+    this.photo,
+  }) : super(key: key);
+  final name;
+  final photo;
+  bool isOnHover = false;
+
+  @override
+  State<SkillsCard> createState() => _SkillsCardState();
+}
+
+class _SkillsCardState extends State<SkillsCard> {
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onHover: (s) {
+        setState(() {
+          widget.isOnHover = true;
+        });
+      },
+      onExit: (s) {
+        setState(() {
+          widget.isOnHover = false;
+        });
+      },
+      child: Container(
+        width: setWidthForDesktop(320),
+        decoration: BoxDecoration(
+          color: widget.isOnHover ? konhoverpurble : kdarkpurble,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: widget.isOnHover
+                      ? setHightForDesktop(130)
+                      : setHightForDesktop(120),
+                  width: widget.isOnHover
+                      ? setWidthForDesktop(160)
+                      : setWidthForDesktop(150),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('${widget.photo}'),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: widget.isOnHover
+                    ? setHightForDesktop(110)
+                    : setHightForDesktop(100),
+                width: widget.isOnHover
+                    ? setWidthForDesktop(210)
+                    : setWidthForDesktop(200),
+                child: Center(
+                  child: FittedBox(
+                    child: Text(
+                      '${widget.name}',
+                      maxLines: 2,
+                      softWrap: true,
+                      style: GoogleFonts.signikaNegative(
+                        fontSize: 25,
+                        color: white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -104,33 +207,29 @@ class SkillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: setHightForDesktop(230),
+      height: setHightForDesktop(240),
       width: setWidthForDesktop(845.5),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: kpink, borderRadius: BorderRadius.circular(10)),
+      child: Container(
+        decoration: BoxDecoration(
+            color: kpink, borderRadius: BorderRadius.circular(10)),
+        child: Align(
+          alignment: Alignment.topRight,
+          child: Container(
+            height: setHightForDesktop(230),
+            width: setWidthForDesktop(820.5),
+            decoration: BoxDecoration(
+              color: kyellow,
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              height: setHightForDesktop(230),
-              width: setWidthForDesktop(820.5),
-              decoration: BoxDecoration(
-                color: kyellow,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: setWidthForDesktop(33),
-                      top: setHightForDesktop(15),
-                    ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: setWidthForDesktop(33),
+                    top: setHightForDesktop(15),
+                  ),
+                  child: Expanded(
+                    flex: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -159,7 +258,10 @@ class SkillCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
                     height: setHightForDesktop(167),
                     width: setWidthForDesktop(167),
                     decoration: BoxDecoration(
@@ -169,11 +271,11 @@ class SkillCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

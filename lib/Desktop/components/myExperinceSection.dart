@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfile2/Desktop/DesktopModels/ExpirenceModel.dart';
 
 import '../../constant.dart';
@@ -38,30 +41,36 @@ class MyExperinceSection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              headSection('My Experince'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.work,
+                    color: kpink,
+                    size: 60,
+                  ),
+                  headSection('My Experince'),
+                ],
+              ),
               SizedBox(
                 height: setHightForDesktop(62),
               ),
               SizedBox(
-                width: setWidthForDesktop(2300),
-                height: setHightForDesktop(900),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: experince.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: setWidthForDesktop(100),
-                    );
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return MyExperinceCard(
-                      name: experince[index].name,
-                      explain: experince[index].explain,
-                      photo: experince[index].photo,
-                    );
-                  },
-                ),
-              ),
+                  width: setWidthForDesktop(2300),
+                  child: Center(
+                    child: Wrap(
+                      children: List.generate(
+                          experince.length,
+                          (index) => Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: MyExperinceCard(
+                                  name: experince[index].name,
+                                  explain: experince[index].explain,
+                                  photo: experince[index].photo,
+                                ),
+                              )),
+                    ),
+                  )),
             ],
           ),
         ),
@@ -70,83 +79,117 @@ class MyExperinceSection extends StatelessWidget {
   }
 }
 
-class MyExperinceCard extends StatelessWidget {
+class MyExperinceCard extends StatefulWidget {
   MyExperinceCard({
     Key? key,
     this.explain,
     this.name,
     this.photo,
+    this.isHover = false,
   }) : super(key: key);
   final name;
   final explain;
   final photo;
+  bool isHover = false;
 
   @override
+  State<MyExperinceCard> createState() => _MyExperinceCardState();
+}
+
+class _MyExperinceCardState extends State<MyExperinceCard> {
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: setHightForDesktop(871),
-      width: setWidthForDesktop(1056),
-      child: Stack(
-        children: [
-          Container(
-            height: setHightForDesktop(871),
-            width: setWidthForDesktop(1056),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Column(
-              children: [
-                Container(
-                  height: setHightForDesktop(436),
-                  width: setWidthForDesktop(1056),
-                  decoration: BoxDecoration(
+    return MouseRegion(
+      onHover: (s) {
+        setState(() {
+          widget.isHover = true;
+        });
+      },
+      onExit: (s) {
+        setState(() {
+          widget.isHover = false;
+        });
+      },
+      child: Container(
+        height: setHightForDesktop(871),
+        width: setWidthForDesktop(1056),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: widget.isHover
+            ? Stack(
+                children: [
+                  Container(
+                    height: setHightForDesktop(871),
+                    width: setWidthForDesktop(1056),
+                    decoration: BoxDecoration(
                       color: darkWihte,
                       borderRadius: BorderRadius.circular(30),
                       image: DecorationImage(
-                        image: AssetImage(photo),
+                        image: AssetImage(widget.photo),
                         fit: BoxFit.cover,
-                      )),
-                ),
-                SizedBox(
-                  height: setHightForDesktop(39),
-                ),
-                SizedBox(
-                  height: setHightForDesktop(100),
-                  width: setWidthForDesktop(1005),
-                  child: Text(
-                    '$name',
-                    style: TextStyle(
-                      color: kpurble,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: setHightForDesktop(15),
-                ),
-                SizedBox(
-                  height: setHightForDesktop(250),
-                  width: setWidthForDesktop(1005),
-                  child: Text(
-                    explain,
-                    maxLines: 10,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(
-                      color: darkgrey2,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
+                      child: Container(
+                        height: setHightForDesktop(871),
+                        width: setWidthForDesktop(1056),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white.withOpacity(0.65),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                // height: setHightForDesktop(100),
+                                // width: setWidthForDesktop(1005),
+                                child: Text('${widget.name}',
+                                    style: GoogleFonts.headlandOne(
+                                      color: kpurble,
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: setHightForDesktop(15),
+                              ),
+                              Text(widget.explain,
+                                  maxLines: 10,
+                                  overflow: TextOverflow.fade,
+                                  style: GoogleFonts.firaSans(
+                                    color: Colors.black,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
+                ],
+              )
+            : Container(
+                height: setHightForDesktop(871),
+                width: setWidthForDesktop(1056),
+                decoration: BoxDecoration(
+                  color: darkWihte,
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                    image: AssetImage(widget.photo),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ],
+              ),
       ),
     );
   }

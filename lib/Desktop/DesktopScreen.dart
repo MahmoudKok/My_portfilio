@@ -31,7 +31,7 @@ class DesktopScreen extends StatelessWidget {
                   MySkillsSection(),
                   MyCodeingKnowledge(),
                   MyExperinceSection(),
-                  CiretifesntsSection(),
+                  // CiretifesntsSection(),
                   MyProjectsSection(),
                   ContactSection(),
                 ],
