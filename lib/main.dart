@@ -1,9 +1,6 @@
 //import 'dart:html';
 import 'package:my_portfile2/Desktop/DesktopScreen.dart';
-import 'package:my_portfile2/MainScreen.dart';
-import 'package:my_portfile2/Mobile/mobile.dart';
 import 'package:my_portfile2/sizeConfig.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 
 void main() {

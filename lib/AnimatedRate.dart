@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:my_portfile2/Mobile/Common.dart';
 import 'package:my_portfile2/constant.dart';
 import 'package:my_portfile2/sizeConfig.dart';

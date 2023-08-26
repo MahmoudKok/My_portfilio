@@ -154,7 +154,7 @@ class HeadSection extends StatelessWidget {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/me.png'),
+                image: AssetImage('assets/images/me.png'),
                 fit: BoxFit.contain,
               ),
             ),
